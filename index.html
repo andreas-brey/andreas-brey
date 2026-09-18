@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Andréas Brey, ingénieur front-end</title>
+<meta name="description" content="Ingénieur front-end à Strasbourg. Seize ans de développement, onze sur le même client web. Accessibilité, performance, architecture JavaScript.">
+<meta name="author" content="Andréas Brey">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Andréas Brey, ingénieur front-end">
+<meta property="og:description" content="Seize ans de développement, onze sur le même client web. Accessibilité, performance, architecture JavaScript.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%230D4853'/%3E%3Cpath d='M5.5 24 L11 8 L14 8 L19.5 24' fill='none' stroke='%23EDEFE9' stroke-width='2.3' stroke-linecap='square'/%3E%3Cpath d='M8.3 19 L16.7 19' stroke='%23EDEFE9' stroke-width='2.3'/%3E%3Cpath d='M22 24 L22 8 L25 8 A4 4 0 0 1 25 15.5 L22 15.5 A4.25 4.25 0 0 1 25.5 24 Z' fill='%23EDEFE9'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/atkinson-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* Restaure le thème choisi avant le premier rendu, pour éviter un flash.
+   Encapsulé : rien ne doit atteindre l'objet global. */
+(function () {
+  try {
+    var saved = localStorage.getItem("theme");
+    if (saved !== "dark" && saved !== "light") { return; }
+    document.documentElement.dataset.theme = saved;
+    var meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) { meta.content = saved; }
+  } catch (e) {
+    /* Stockage indisponible (navigation privée, cookies bloqués) : on garde
+       la préférence système, qui est déjà le comportement par défaut. */
+  }
+})();
+</script>
+<style>
+/* ===========================================================================
+   Polices hébergées sur le même domaine. Aucune requête vers un tiers, ce qui
+   rend littéralement vraie la promesse du colophon et supprime quatre allers
+   retours réseau. Atkinson est un fichier variable : un seul téléchargement
+   couvre les graisses 400 à 700.
+   =========================================================================== */
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/atkinson-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/atkinson-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/atkinson-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/atkinson-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "DM Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/dmmono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "DM Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/dmmono-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ===========================================================================
+   Jetons. Le thème clair porte la définition complète, le thème sombre ne
+   redéfinit que des valeurs. Rapports de contraste recalculés à la main :
+     clair   texte 13,9:1   secondaire 8,3:1   liens 8,8:1   filets 4,1:1
+     sombre  texte 14,5:1   secondaire 7,8:1   liens 8,8:1   filets 4,8:1
+   Le pied de page les remesure en direct, sur les couleurs réellement
+   appliquées, donc ces chiffres ne peuvent pas se périmer en silence.
+   =========================================================================== */
+:root {
+  color-scheme: light dark;
+
+  --paper: #EDEFE9;
+  --paper-alt: #E2E5DC;
+  --ink: #1A231F;
+  --ink-muted: #3E4741;
+  --rule: #6C766F;
+  --accent: #0D4853;
+
+  --font-text: "Atkinson Hyperlegible Next", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+
+  --measure: 64ch;
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --rhythm: clamp(2.75rem, 7vw, 4.5rem);
+  --toolbar-h: 3.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #131815;
+    --paper-alt: #1B221E;
+    --ink: #E4E8DF;
+    --ink-muted: #A3AEA6;
+    --rule: #7C867F;
+    --accent: #6FC2CE;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #131815;
+  --paper-alt: #1B221E;
+  --ink: #E4E8DF;
+  --ink-muted: #A3AEA6;
+  --rule: #7C867F;
+  --accent: #6FC2CE;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  text-align: start;
+}
+@media (max-width: 37.5rem) { body { font-size: 1rem; } }
+
+p { margin: 0 0 1em; max-width: var(--measure); text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+
+h1, h2, h3 { margin: 0; font-weight: 700; line-height: 1.15; text-wrap: balance; }
+
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: from-font; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Anneau de focus en deux temps : un trait d'accent, puis un halo de la
+   couleur du fond de page. Le halo sépare l'anneau de ce qui est dessous,
+   y compris sur le fond alterné des encarts. */
+:where(a, button):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--paper);
+}
+
+::selection { background: var(--accent); color: var(--paper); }
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important; height: 1px !important;
+  margin: -1px !important; padding: 0 !important; border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.skip-link {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px); left: 0;
+  z-index: 10;
+  margin: 0.5rem;
+  padding: 0.7rem 0.95rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+#content:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.shell {
+  width: 100%;
+  max-width: 58rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Barre d'outils ----------
+   Les deux boutons ne servent à rien sans JavaScript : ils ne sont donc
+   révélés que par lui. La hauteur est réservée d'avance pour que cette
+   révélation ne décale rien. */
+.topbar { min-height: var(--toolbar-h); }
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-block: 1rem 0;
+}
+.toolbar[hidden] { display: none; }
+
+.toolbar button, .copy-btn {
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.5rem 0.75rem;
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+.toolbar button:hover, .copy-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
+
+/* ---------- En-tête ---------- */
+.masthead {
+  display: grid;
+  gap: 1.75rem;
+  padding-block: clamp(1.5rem, 5vw, 3rem) 0;
+}
+/* Portrait carré, pas rond : la page n'a aucun arrondi, un cercle jurerait
+   avec les filets et les angles droits. */
+.portrait {
+  display: block;
+  width: 5.5rem;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  background: var(--paper-alt);
+}
+@media (min-width: 40rem) {
+  .masthead {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+  .portrait { grid-column: 2; grid-row: 1; width: 8.75rem; }
+  .ident { grid-column: 1; grid-row: 1; }
+}
+.masthead h1 {
+  font-size: clamp(2.25rem, 7.5vw, 3.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+.role {
+  margin: 0.75rem 0 0;
+  max-width: 28ch;
+  font-size: clamp(1.0625rem, 2.6vw, 1.3rem);
+}
+.place {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-muted);
+}
+.tagline {
+  margin: clamp(1.5rem, 4vw, 2.25rem) 0 0;
+  max-width: 34ch;
+  font-size: clamp(1.1875rem, 3vw, 1.5rem);
+  line-height: 1.42;
+}
+
+/* ---------- Frise de mesure ----------
+   Au-dessus de 34rem, chaque segment occupe une largeur proportionnelle à sa
+   durée réelle et le repère pointillé tombe sur juin 2012. En dessous, les
+   segments s'empilent : ce n'est plus une échelle mais une liste datée, et la
+   légende cesse alors d'annoncer une proportionnalité. */
+.measure { margin: var(--rhythm) 0 0; }
+.measure-bar {
+  position: relative;
+  display: flex;
+  margin-top: 2.4rem;
+  border-block: 1px solid var(--rule);
+  border-inline-start: 1px solid var(--rule);
+}
+.measure-seg {
+  min-width: 0;
+  padding: 0.7rem 0.6rem 0.85rem;
+  border-inline-end: 1px solid var(--rule);
+}
+/* 2 ans, 3 ans et 11 ans sur une échelle de seize. */
+.measure-seg:nth-child(1) { flex: 0 0 12.5%; }
+.measure-seg:nth-child(2) { flex: 0 0 18.75%; background: var(--paper-alt); }
+.measure-seg:nth-child(3) { flex: 0 0 68.75%; }
+.seg-years {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.seg-name {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  hyphens: manual;
+}
+.tick {
+  position: absolute;
+  top: -2.4rem;
+  left: 15.6%;
+  height: 2.4rem;
+  display: flex;
+  align-items: flex-start;
+  border-inline-start: 2px dotted var(--accent);
+  padding-inline-start: 0.45rem;
+}
+.tick-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.measure figcaption {
+  margin-top: 1.1rem;
+  max-width: 58ch;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+@media (max-width: 34rem) {
+  .measure-bar {
+    display: block;
+    margin-top: 0;
+    border-block: 0;
+    border-inline-start: 0;
+  }
+  .measure-seg {
+    padding-inline: 0;
+    border-inline-end: 0;
+    border-block-start: 1px solid var(--rule);
+  }
+  .measure-seg:nth-child(2) { background: none; }
+  .tick {
+    position: static;
+    display: block;
+    height: auto;
+    padding: 0.5rem 0 0;
+    border-inline-start: 0;
+  }
+  .scale-note { display: none; }
+}
+
+/* ---------- Sections ---------- */
+section { padding-block: var(--rhythm); }
+section + section { border-top: 1px solid var(--rule); }
+/* Le bloc d'ouverture respire plus que les autres : c'est lui qui porte le
+   positionnement, et cela casse le pas régulier de la page. */
+.section-lead { padding-block: calc(var(--rhythm) * 1.3); }
+
+.label {
+  margin-bottom: 1.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.quote {
+  margin: 2.75rem 0 0;
+  max-width: 38ch;
+  border-inline-start: 2px solid var(--accent);
+  padding-inline-start: clamp(1rem, 3vw, 1.75rem);
+  font-size: clamp(1.25rem, 3.1vw, 1.625rem);
+  font-style: italic;
+  line-height: 1.42;
+}
+
+.stack { display: grid; gap: 2.5rem; }
+
+.entry h3 { margin-bottom: 0.55rem; font-size: 1.1875rem; }
+.entry .when {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.entry p { color: var(--ink-muted); }
+.entry p.lead { color: var(--ink); }
+
+.aside-note {
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+
+.shifts { margin: 1.25rem 0 0; padding: 0; max-width: var(--measure); list-style: none; }
+.shifts li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.15rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+}
+.shifts li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 1.2rem;
+  width: 0.45rem; height: 2px;
+  background: var(--accent);
+}
+
+.grid2 { display: grid; gap: 2.25rem; }
+@media (min-width: 46rem) { .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 3rem; } }
+
+.skill h3 { margin-bottom: 0.45rem; font-size: 0.9375rem; }
+.skill p { margin: 0; font-size: 0.9375rem; color: var(--ink-muted); }
+
+.aside {
+  background: var(--paper-alt);
+  border: 1px solid var(--rule);
+  padding: clamp(1.1rem, 3.5vw, 1.5rem);
+}
+.aside h3 { margin-bottom: 0.5rem; font-size: 0.9375rem; }
+.aside p { font-size: 0.875rem; color: var(--ink-muted); }
+.entry + .aside { margin-top: 2.75rem; }
+
+.section-intro { margin-bottom: 2.25rem; }
+
+.links { margin-top: 2rem; max-width: var(--measure); }
+.links > * {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
+  text-decoration: none;
+}
+.links > *:last-child { border-bottom: 1px solid var(--rule); }
+.links a:hover strong { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
+.links strong { font-size: 1rem; color: var(--accent); }
+.links span {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.copy-btn { margin-top: 1.1rem; }
+
+/* ---------- Colophon ----------
+   Le filet est porté par le contenu, pas par le pied de page, pour qu'il
+   s'aligne exactement sur ceux des sections. */
+footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
+.colophon {
+  max-width: 64ch;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+.colophon p { max-width: none; margin-bottom: 0.45rem; }
+.readout { font-variant-numeric: tabular-nums; }
+.readout b { font-weight: 400; color: var(--ink); }
+
+@media (prefers-reduced-motion: no-preference) {
+  a, button { transition: color 120ms ease, border-color 120ms ease; }
+}
+
+@media print {
+  .toolbar, .skip-link, .copy-btn { display: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link visually-hidden" href="#content" data-i18n="skip">Aller au contenu principal</a>
+
+<header class="shell topbar">
+  <div class="toolbar" id="toolbar" hidden>
+    <button type="button" id="lang-btn" lang="en" data-i18n="langLabel">English</button>
+    <button type="button" id="theme-btn"></button>
+  </div>
+</header>
+
+<main id="content" tabindex="-1" class="shell">
+
+  <header class="masthead">
+    <!-- alt vide et assumé : le nom est juste à côté dans le h1, un texte de
+         remplacement le ferait répéter deux fois par un lecteur d'écran. -->
+    <img class="portrait" id="portrait" src="img/portrait.webp" alt="" width="420" height="420" fetchpriority="high" decoding="async">
+    <div class="ident">
+      <h1>Andréas Brey</h1>
+      <p class="role" data-i18n="role">Ingénieur front-end senior, spécialisé accessibilité</p>
+      <p class="place" data-i18n="place">Strasbourg, Grand Est, France</p>
+      <p class="tagline" data-i18n="tagline">Onze ans sur le même client web, utilisé chaque jour par des entreprises dans le monde entier. Accessibilité, performance, architecture front-end.</p>
+    </div>
+  </header>
+
+  <figure class="measure">
+    <div class="measure-bar" aria-hidden="true">
+      <div class="measure-seg">
+        <span class="seg-years"><span>2010</span></span>
+        <span class="seg-name" data-i18n="seg1">Missions .NET</span>
+      </div>
+      <div class="measure-seg">
+        <span class="seg-years"><span>2012</span></span>
+        <span class="seg-name" data-i18n="seg2">Ortho Clinical Diagnostics</span>
+        <!-- Le repère vit dans le segment de 2012 : positionné sur l'échelle
+             en grand écran, il reste au bon endroit une fois la frise empilée. -->
+        <span class="tick"><span class="tick-label" data-i18n="tick">Ingénieur CNAM, juin 2012</span></span>
+      </div>
+      <div class="measure-seg">
+        <span class="seg-years"><span>2015</span><span>2026</span></span>
+        <span class="seg-name" data-i18n="seg3">Four J's Development Tools</span>
+      </div>
+    </div>
+    <figcaption>
+      <span data-i18n="measureCaption">Seize ans de métier, trois employeurs, un seul produit depuis 2015.</span>
+      <span class="scale-note" data-i18n="scaleNote">L'échelle ci-dessus est proportionnelle à la durée réelle de chaque période.</span>
+    </figcaption>
+  </figure>
+
+  <section class="section-lead" aria-labelledby="s-intro">
+    <h2 class="visually-hidden" id="s-intro" data-i18n="introTitle">En bref</h2>
+    <p data-i18n="intro">Je développe des interfaces web depuis seize ans, presque toujours en JavaScript. Depuis 2015, je travaille chez Four J's Development Tools sur un client web que des entreprises utilisent tous les jours, partout dans le monde. Mon métier tient en trois questions : est-ce que ça tient la charge, est-ce que ce sera encore maintenable dans cinq ans, et est-ce que tout le monde peut s'en servir, au clavier et au lecteur d'écran compris.</p>
+    <blockquote class="quote">
+      <p data-i18n="quote">Le genre de projets où l'on vit plusieurs années avec son propre code, et où un mauvais choix technique se paie pendant des années.</p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="s-work">
+    <h2 class="label" id="s-work" data-i18n="workTitle">Ce que je fais, concrètement</h2>
+    <div class="stack">
+      <article class="entry">
+        <h3 data-i18n="a11yTitle">Accessibilité</h3>
+        <p class="lead" data-i18n="a11yBody">WCAG, ARIA, navigation au clavier, lecteurs d'écran. Je la traite dans le code, mais surtout avant le code : audits, tests automatisés dans la chaîne d'intégration, revues d'ergonomie avec l'équipe produit. C'est la partie du métier où je vais le plus loin, et celle qui change le plus le résultat pour l'utilisateur.</p>
+        <p data-i18n="a11yBody2">Le travail utile commence là où les outils s'arrêtent : savoir ce qu'un lecteur d'écran annonce vraiment, et pouvoir contredire une règle de lint, spécification à l'appui, quand elle signale un faux positif.</p>
+      </article>
+      <article class="entry">
+        <h3 data-i18n="jsTitle">JavaScript sur la durée</h3>
+        <p class="lead" data-i18n="jsBody">Quatorze ans à écrire du JavaScript, et surtout à le maintenir. J'ai commencé quand la compatibilité navigateurs se faisait à la main, Internet Explorer 6 compris. J'ai vu passer assez de frameworks pour savoir ce qui reste : la plateforme. J'adopte un outil quand il règle un problème que j'ai vraiment.</p>
+      </article>
+      <article class="entry">
+        <h3 data-i18n="aiTitle">L'IA, outil de travail</h3>
+        <p class="lead" data-i18n="aiBody">Je m'en sers tous les jours : revue de code, génération et conversion de tests end to end, analyse de bases de code que plus personne ne connaît, documentation technique. Le temps gagné est réel, à condition de savoir où l'outil se trompe. Rien de généré n'entre sans un test qui échoue avant et qui passe après.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-career">
+    <h2 class="label" id="s-career" data-i18n="careerTitle">Parcours</h2>
+    <div class="stack">
+      <article class="entry">
+        <span class="when">2010-2011</span>
+        <h3 data-i18n="c1Title">Missions .NET, chez les clients finaux</h3>
+        <p class="lead" data-i18n="c1Context">C#, WPF, Silverlight. Des applications métier livrées directement chez ceux qui allaient s'en servir.</p>
+        <p data-i18n="c1Focus">Premier constat qui ne m'a plus quitté : c'est l'interface qui décide si l'outil est utilisé, pas le moteur derrière.</p>
+      </article>
+      <article class="entry">
+        <span class="when">2012-2015</span>
+        <h3 data-i18n="c2Title">Ortho Clinical Diagnostics</h3>
+        <p class="lead" data-i18n="c2Context">Trois ans de développement web JavaScript dans le diagnostic médical, au sein de ce qui était alors une filiale de Johnson &amp; Johnson.</p>
+        <p data-i18n="c2Focus">La bascule définitive vers le front-end, dans un secteur où un écran mal compris n'est pas un détail.</p>
+      </article>
+      <article class="entry">
+        <span class="when" data-i18n="c3When">Depuis 2015</span>
+        <h3 data-i18n="c3Title">Four J's Development Tools</h3>
+        <p class="lead" data-i18n="c3Context">Développement et évolution d'un client web utilisé au quotidien par des entreprises du monde entier, dans une équipe produit internationale, en anglais.</p>
+        <p data-i18n="c3Focus">Architecture front-end, performance, accessibilité. Onze ans sur la même base de code : mes décisions d'il y a cinq ans, je les recroise encore.</p>
+        <ul class="shifts">
+          <li data-i18n="shift1">Migration de la chaîne de build vers Vite</li>
+          <li data-i18n="shift2">Arrivée de TypeScript sur le code et les tests</li>
+          <li data-i18n="shift3">Refonte de la suite end to end, de Protractor vers TestCafe</li>
+          <li data-i18n="shift4">L'accessibilité passée du correctif au critère produit</li>
+        </ul>
+      </article>
+      <article class="entry">
+        <span class="when">2012</span>
+        <h3 data-i18n="eduTitle">Formation</h3>
+        <p data-i18n="eduBody">Ingénieur en informatique, Conservatoire National des Arts et Métiers, juin 2012. Formation ITII Alsace.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-skills">
+    <h2 class="label" id="s-skills" data-i18n="skillsTitle">Compétences</h2>
+    <p class="section-intro" data-i18n="skillsIntro">Ce que j'utilise réellement, rangé par usage plutôt que par mot-clé.</p>
+    <div class="grid2">
+      <div class="skill">
+        <h3 data-i18n="sk1Title">Le socle</h3>
+        <p data-i18n="sk1Items">JavaScript, TypeScript, SCSS, APIs navigateur, standards du Web</p>
+      </div>
+      <div class="skill">
+        <h3 data-i18n="sk2Title">Accessibilité</h3>
+        <p data-i18n="sk2Items">WCAG 2.2, ARIA, navigation au clavier, lecteurs d'écran, audits et revues</p>
+      </div>
+      <div class="skill">
+        <h3 data-i18n="sk3Title">Tests et qualité</h3>
+        <p data-i18n="sk3Items">Vitest en unitaire, Playwright et TestCafe en end to end, revue de code, vérifications automatisées</p>
+      </div>
+      <div class="skill">
+        <h3 data-i18n="sk4Title">Architecture et performance</h3>
+        <p data-i18n="sk4Items">Architecture front-end à grande échelle, performance navigateur, compatibilité multi-navigateurs, Vite et chaîne de build</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-projects">
+    <h2 class="label" id="s-projects" data-i18n="projectsTitle">Projets</h2>
+    <article class="entry">
+      <span class="when">2026</span>
+      <h3 data-i18n="auditTitle">Un outil d'audit d'accessibilité</h3>
+      <p class="lead" data-i18n="auditBody">Une suite d'audit automatisée, écrite avec Playwright, qui parcourt un site et remonte ses défauts d'accessibilité sans configuration préalable : une vingtaine de modules d'analyse, près de soixante règles, et une séparation nette entre ce qui bloque vraiment un utilisateur et ce qui mérite un examen humain.</p>
+      <p data-i18n="auditBody2">Née d'un constat de terrain : les outils génériques produisent beaucoup de faux positifs, et passent à côté de ce qui gêne réellement à l'usage.</p>
+      <p class="aside-note" data-i18n="auditNote">Outil interne, non publié. Je le montre volontiers en entretien.</p>
+    </article>
+    <div class="aside">
+      <h3 data-i18n="web3Title">Une parenthèse Web3, 2021-2022</h3>
+      <p data-i18n="web3Body">Co-fondateur de deux collections NFT sur Solana, The Outfit et Gatsby Club, et accompagnement d'autres projets sur leur lancement : candy machine, storefront, mint. Autant une expérience d'entrepreneur que de développeur, dans un contexte où tout devait tenir le jour J. Chapitre clos.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-offscreen">
+    <h2 class="label" id="s-offscreen" data-i18n="offscreenTitle">En dehors du code</h2>
+    <p data-i18n="offscreenBody">Trail et randonnée, et plusieurs treks en bivouac par an, en famille : partir avec ce qu’on porte sur le dos. Les échecs aussi, pour le plaisir des coups dont on ne mesure la conséquence que bien plus tard.</p>
+  </section>
+
+  <section aria-labelledby="s-contact">
+    <h2 class="label" id="s-contact" data-i18n="contactTitle">Contact</h2>
+    <p data-i18n="contactBody">Basé à Strasbourg, habitué au travail avec une équipe répartie sur plusieurs pays. Si le sujet touche l'accessibilité, l'architecture front-end ou une base de code qui doit durer, écrivez-moi.</p>
+    <p data-i18n="contactGithub">L'essentiel de mon travail est propriétaire et n'apparaît donc pas sur GitHub, où l'on trouvera surtout mes projets personnels.</p>
+    <div class="links">
+      <div id="mail-row">
+        <strong>Email</strong>
+        <span id="mail-text">andreas.brey [chez] gmail.com</span>
+      </div>
+      <a href="https://www.linkedin.com/in/andreas-brey-a64134b9" rel="me noopener" target="_blank">
+        <strong>LinkedIn</strong>
+        <span>andreas-brey</span>
+        <span class="visually-hidden" data-i18n="newTab">ouvre un nouvel onglet</span>
+      </a>
+      <a href="https://github.com/Fulgurus" rel="me noopener" target="_blank">
+        <strong>GitHub</strong>
+        <span>Fulgurus</span>
+        <span class="visually-hidden" data-i18n="newTab">ouvre un nouvel onglet</span>
+      </a>
+    </div>
+    <button type="button" class="copy-btn" id="copy-btn" hidden data-i18n="copyLabel">Copier l'adresse email</button>
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="colophon">
+    <p data-i18n="foot1">© 2026 Andréas Brey. Une page statique, sans traceur, sans cookie et sans requête vers un tiers. Écrite à la main, testée au clavier.</p>
+    <p class="readout" id="readout"></p>
+    <p data-i18n="foot2">Composée en Atkinson Hyperlegible Next, dessinée pour la basse vision, et en DM Mono.</p>
+  </div>
+</footer>
+
+<p class="visually-hidden" id="announcer" role="status"></p>
+
+<script>
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const announcer = document.getElementById("announcer");
+  const langBtn = document.getElementById("lang-btn");
+  const themeBtn = document.getElementById("theme-btn");
+  const readout = document.getElementById("readout");
+
+  /* ------------------------------ Traductions ------------------------------
+     Le français est dans le HTML : sans JavaScript la page reste complète et
+     lisible. L'anglais est appliqué par substitution sur les mêmes noeuds. */
+  const EN = {
+    skip: "Skip to main content",
+    langLabel: "Français",
+    role: "Senior front-end engineer, accessibility specialist",
+    place: "Strasbourg, eastern France",
+    tagline: "Eleven years on the same web client, used every day by companies around the world. Accessibility, performance, front-end architecture.",
+    seg1: "Contract .NET work",
+    seg2: "Ortho Clinical Diagnostics",
+    seg3: "Four J's Development Tools",
+    tick: "CNAM engineering degree, June 2012",
+    measureCaption: "Sixteen years in the trade, three employers, one product since 2015.",
+    scaleNote: "The scale above is proportional to how long each period actually lasted.",
+    introTitle: "In brief",
+    intro: "I have been building web interfaces for sixteen years, almost always in JavaScript. Since 2015 I have worked at Four J's Development Tools on a web client that companies around the world use every day. The work comes down to three questions: does it hold up under load, will it still be maintainable in five years, and can everyone actually use it, keyboard and screen reader included.",
+    quote: "The kind of work where you live with your own code for years, and where one bad technical call keeps costing you for just as long.",
+    workTitle: "What I actually do",
+    a11yTitle: "Accessibility",
+    a11yBody: "WCAG, ARIA, keyboard navigation, screen readers. I handle it in the code, but mostly before the code: audits, automated checks in the build pipeline, design reviews with the product team. It is the part of the job I go deepest on, and the one that changes the most for the people using the product.",
+    a11yBody2: "The useful work starts where the tooling stops: knowing what a screen reader actually announces, and being able to argue a lint rule down, specification in hand, when it flags a false positive.",
+    jsTitle: "JavaScript for the long run",
+    jsBody: "Fourteen years writing JavaScript, and above all maintaining it. I started when browser compatibility was done by hand, Internet Explorer 6 included. I have watched enough frameworks come and go to know what stays: the platform itself. I pick up a tool when it solves a problem I actually have.",
+    aiTitle: "AI as a working tool",
+    aiBody: "I use it daily: code review, writing and converting end to end tests, digging through codebases nobody remembers, technical documentation. The time it saves is real, provided you know where the tool gets things wrong. Nothing generated ships without a test that failed before and passes after.",
+    careerTitle: "Career",
+    c1Title: "Contract .NET work, on customer sites",
+    c1Context: "C#, WPF, Silverlight. Line of business applications delivered straight to the people who would use them.",
+    c1Focus: "First lesson that stuck: the interface decides whether a tool gets used, not the engine behind it.",
+    c2Title: "Ortho Clinical Diagnostics",
+    c2Context: "Three years of JavaScript web development in medical diagnostics, inside what was then a Johnson & Johnson subsidiary.",
+    c2Focus: "The move to front-end for good, in a field where a misread screen is not a small thing.",
+    c3When: "Since 2015",
+    c3Title: "Four J's Development Tools",
+    c3Context: "Building and evolving a web client that companies worldwide use every day, inside an international product team, in English.",
+    c3Focus: "Front-end architecture, performance, accessibility. Eleven years on one codebase: I still run into decisions I made five years ago.",
+    shift1: "Build tooling migrated to Vite",
+    shift2: "TypeScript brought into the code and the tests",
+    shift3: "End to end suite rebuilt, from Protractor to TestCafe",
+    shift4: "Accessibility moved from bug fixing to product requirement",
+    eduTitle: "Education",
+    eduBody: "Engineering degree in computer science, Conservatoire National des Arts et Métiers, June 2012. ITII Alsace programme.",
+    skillsTitle: "Skills",
+    skillsIntro: "What I actually use, sorted by what it is for rather than by keyword.",
+    sk1Title: "Core",
+    sk1Items: "JavaScript, TypeScript, SCSS, browser APIs, web standards",
+    sk2Title: "Accessibility",
+    sk2Items: "WCAG 2.2, ARIA, keyboard navigation, screen readers, audits and reviews",
+    sk3Title: "Testing and quality",
+    sk3Items: "Vitest for unit tests, Playwright and TestCafe for end to end, code review, automated checks",
+    sk4Title: "Architecture and performance",
+    sk4Items: "Large scale front-end architecture, browser performance, cross-browser compatibility, Vite and build tooling",
+    projectsTitle: "Projects",
+    auditTitle: "An accessibility audit tool",
+    auditBody: "An automated audit suite, built with Playwright, that walks a site and reports its accessibility defects with no setup: around twenty analysis modules, close to sixty rules, and a clear line between what actually blocks someone and what needs a human look.",
+    auditBody2: "It came out of a field observation: generic tools raise a lot of false positives, and miss what really gets in the way.",
+    auditNote: "Internal tool, not published. Happy to walk through it in an interview.",
+    web3Title: "A Web3 detour, 2021-2022",
+    web3Body: "Co-founder of two NFT collections on Solana, The Outfit and Gatsby Club, plus launch support for other projects: candy machine, storefront, mint. As much a founder's experience as an engineer's, in a setting where everything had to hold on launch day. A closed chapter.",
+    offscreenTitle: "Away from the code",
+    offscreenBody: "Trail running and hiking, and a few backpacking treks a year with my family: you carry what you need and nothing more. Chess too, for the pleasure of moves whose consequences only show up much later.",
+    contactTitle: "Contact",
+    contactBody: "Based in Strasbourg, used to working with a team spread across several countries. If your subject is accessibility, front-end architecture, or a codebase that has to last, get in touch.",
+    contactGithub: "Most of my work is proprietary and does not show up on GitHub, where you will mainly find personal projects.",
+    newTab: "opens in a new tab",
+    copyLabel: "Copy email address",
+    copyDone: "Email address copied",
+    foot1: "© 2026 Andréas Brey. One static page, no trackers, no cookies, no third party requests. Hand written, keyboard tested.",
+    foot2: "Set in Atkinson Hyperlegible Next, designed for low vision, and DM Mono.",
+    readoutLabel: "Contrast measured live on this page:",
+    readoutText: "body text",
+    readoutMuted: "secondary text",
+    readoutLink: "links",
+    readoutTail: "WCAG AAA starts at 7:1",
+    langSwitched: "Page language changed to English.",
+    toDark: "Dark theme",
+    toLight: "Light theme",
+    title: "Andréas Brey, front-end engineer"
+  };
+
+  const FR = {
+    copyDone: "Adresse email copiée",
+    readoutLabel: "Contraste mesuré en direct sur cette page :",
+    readoutText: "texte courant",
+    readoutMuted: "texte secondaire",
+    readoutLink: "liens",
+    readoutTail: "le niveau WCAG AAA commence à 7:1",
+    langSwitched: "Langue de la page passée en français.",
+    toDark: "Thème sombre",
+    toLight: "Thème clair",
+    title: "Andréas Brey, ingénieur front-end"
+  };
+
+  /* Le français affiché fait foi : on le relève une fois pour pouvoir y revenir. */
+  const nodes = [...document.querySelectorAll("[data-i18n]")];
+  for (const node of nodes) { FR[node.dataset.i18n] = node.textContent; }
+
+  let lang = "fr";
+  const dict = () => (lang === "en" ? EN : FR);
+
+  const readStore = key => { try { return localStorage.getItem(key); } catch { return null; } };
+  const writeStore = (key, value) => { try { localStorage.setItem(key, value); } catch { /* stockage indisponible */ } };
+
+  const announce = message => {
+    announcer.textContent = "";
+    setTimeout(() => { announcer.textContent = message; }, 80);
+  };
+
+  /* -------------------------------- Langue --------------------------------
+     La langue vit aussi dans l'URL : la version anglaise est donc partageable
+     telle quelle, et un rechargement la conserve. */
+  const applyLang = (next, { announceChange = false, pushUrl = false } = {}) => {
+    lang = next;
+    const words = dict();
+    root.lang = next;
+    for (const node of nodes) {
+      const value = words[node.dataset.i18n];
+      if (value) { node.textContent = value; }
+    }
+    langBtn.lang = next === "fr" ? "en" : "fr";
+    document.title = words.title;
+    paintTheme();
+    paintReadout();
+    writeStore("lang", next);
+    if (pushUrl) {
+      const url = new URL(location.href);
+      url.searchParams.set("lang", next);
+      history.replaceState(null, "", url);
+    }
+    if (announceChange) { announce(words.langSwitched); }
+  };
+
+  langBtn.addEventListener("click", () => {
+    applyLang(lang === "fr" ? "en" : "fr", { announceChange: true, pushUrl: true });
+  });
+
+  /* -------------------------------- Thème ---------------------------------
+     Deux états seulement : la préférence système, ou son contraire épinglé.
+     Le bouton annonce la cible et non l'état courant, si bien que son nom
+     accessible contient son texte visible (WCAG 2.5.3). */
+  const darkQuery = matchMedia("(prefers-color-scheme: dark)");
+  const currentTheme = () => root.dataset.theme || (darkQuery.matches ? "dark" : "light");
+
+  function paintTheme() {
+    const words = dict();
+    const isDark = currentTheme() === "dark";
+    themeBtn.textContent = isDark ? words.toLight : words.toDark;
+    themeBtn.setAttribute("aria-label", lang === "en"
+      ? `Switch to the ${isDark ? "light" : "dark"} theme`
+      : `Basculer vers le thème ${isDark ? "clair" : "sombre"}`);
+  }
+
+  themeBtn.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    document.querySelector('meta[name="color-scheme"]')?.setAttribute("content", next);
+    writeStore("theme", next);
+    paintTheme();
+    paintReadout();
+  });
+
+  darkQuery.addEventListener("change", () => { paintTheme(); paintReadout(); });
+
+  /* --------------------------- Relevé de contraste ---------------------------
+     Rien n'est codé en dur : on lit les couleurs réellement appliquées par le
+     navigateur et on applique la formule de luminance WCAG. Le relevé suit donc
+     le thème affiché et ne peut pas se périmer. */
+  const channel = value => {
+    const v = value / 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+
+  const luminance = color => {
+    const parts = String(color).match(/[\d.]+/g);
+    if (!parts || parts.length < 3) { return null; }
+    const [r, g, b] = parts.map(Number);
+    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+  };
+
+  const contrastRatio = (foreground, background) => {
+    const a = luminance(foreground);
+    const b = luminance(background);
+    if (a === null || b === null) { return null; }
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  };
+
+  const formatRatio = value => {
+    const text = value.toFixed(1);
+    return lang === "en" ? text : text.replace(".", ",");
+  };
+
+  function paintReadout() {
+    const words = dict();
+    const background = getComputedStyle(document.body).backgroundColor;
+    const samples = [
+      [words.readoutText, document.body],
+      [words.readoutMuted, document.querySelector(".place")],
+      [words.readoutLink, document.querySelector(".links strong")]
+    ];
+
+    readout.textContent = "";
+    const measured = [];
+    for (const [label, element] of samples) {
+      if (!element) { continue; }
+      const ratio = contrastRatio(getComputedStyle(element).color, background);
+      if (ratio) { measured.push([label, `${formatRatio(ratio)}:1`]); }
+    }
+    if (!measured.length) { return; }
+
+    readout.append(`${words.readoutLabel} `);
+    measured.forEach(([label, value], index) => {
+      if (index) { readout.append(" · "); }
+      readout.append(`${label} `);
+      const strong = document.createElement("b");
+      strong.textContent = value;
+      readout.append(strong);
+    });
+    readout.append(` (${words.readoutTail})`);
+  }
+
+  /* ---------------------------------- Email ----------------------------------
+     L'adresse n'est jamais écrite en clair dans la source : elle est assemblée
+     ici, puis la ligne devient un vrai lien. Sans JavaScript il reste une ligne
+     de texte lisible, et rien de cassé. */
+  const address = `${["andreas", "brey"].join(".")}${String.fromCharCode(64)}${["gmail", "com"].join(".")}`;
+  const mailHref = `mailto:${address}`;
+  const mailRow = document.getElementById("mail-row");
+  const mailLink = document.createElement("a");
+  mailLink.href = mailHref;
+  mailLink.append(...mailRow.childNodes);
+  mailRow.replaceWith(mailLink);
+  document.getElementById("mail-text").textContent = address;
+
+  const copyBtn = document.getElementById("copy-btn");
+  if (navigator.clipboard?.writeText) {
+    copyBtn.hidden = false;
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(address);
+        copyBtn.textContent = dict().copyDone;
+        announce(dict().copyDone);
+        setTimeout(() => { copyBtn.textContent = dict().copyLabel; }, 2400);
+      } catch {
+        location.href = mailHref;
+      }
+    });
+  }
+
+  /* Si le portrait manque, on le retire plutôt que de laisser une image cassée. */
+  document.getElementById("portrait")?.addEventListener("error", event => event.target.remove());
+
+  /* -------------------------------- Démarrage -------------------------------- */
+  const requested = new URLSearchParams(location.search).get("lang");
+  const stored = readStore("lang");
+  const preferred = [requested, stored].find(value => value === "fr" || value === "en")
+    ?? (navigator.language?.toLowerCase().startsWith("fr") ? "fr" : "en");
+
+  applyLang(preferred);
+  document.getElementById("toolbar").hidden = false;
+})();
+</script>
+
+</body>
+</html>
