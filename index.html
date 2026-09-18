@@ -447,6 +447,16 @@ section + section { border-top: 1px solid var(--rule); }
 .aside h3 { margin-bottom: 0.5rem; font-size: 0.9375rem; }
 .aside p { font-size: 0.875rem; color: var(--ink-muted); }
 .entry + .aside { margin-top: 2.75rem; }
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.15rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+.project-links span { color: var(--ink-muted); }
 
 .section-intro { margin-bottom: 2.25rem; }
 
@@ -647,6 +657,12 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     <div class="aside">
       <h3 data-i18n="web3Title">Une parenthèse Web3, 2021-2022</h3>
       <p data-i18n="web3Body">Co-fondateur de deux collections NFT sur Solana, The Outfit et Gatsby Club, et accompagnement d'autres projets sur leur lancement : candy machine, storefront, mint. Autant une expérience d'entrepreneur que de développeur, dans un contexte où tout devait tenir le jour J. Chapitre clos.</p>
+      <p class="project-links">
+        <span data-i18n="stillOnline">Encore en ligne :</span>
+        <a href="https://outfit-gold.vercel.app/#/" rel="noopener" target="_blank">The Outfit<span class="visually-hidden" data-i18n="newTab">ouvre un nouvel onglet</span></a>
+        <a href="https://gatsby-club-market-7xmg2cb7b-fulgurus.vercel.app/" rel="noopener" target="_blank">Gatsby Club Market<span class="visually-hidden" data-i18n="newTab">ouvre un nouvel onglet</span></a>
+        <a href="https://kiwinests-ol0ta7hf6-fulgurus.vercel.app/" rel="noopener" target="_blank">Kute Kiwi Nests<span class="visually-hidden" data-i18n="newTab">ouvre un nouvel onglet</span></a>
+      </p>
     </div>
   </section>
 
@@ -762,6 +778,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     web3Body: "Co-founder of two NFT collections on Solana, The Outfit and Gatsby Club, plus launch support for other projects: candy machine, storefront, mint. As much a founder's experience as an engineer's, in a setting where everything had to hold on launch day. A closed chapter.",
     offscreenTitle: "Away from the code",
     offscreenBody: "Trail running and hiking, and a few backpacking treks a year with my family: you carry what you need and nothing more. Chess too, for the pleasure of moves whose consequences only show up much later.",
+    stillOnline: "Still online:",
     contactTitle: "Contact",
     contactBody: "Based in Strasbourg, used to working with a team spread across several countries. If your subject is accessibility, front-end architecture, or a codebase that has to last, get in touch.",
     contactGithub: "Most of my work is proprietary and does not show up on GitHub, where you will mainly find personal projects.",
