@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>Andréas Brey, ingénieur front-end</title>
-<meta name="description" content="Ingénieur front-end à Strasbourg. Seize ans de développement, onze sur le même client web. Accessibilité, performance, architecture JavaScript.">
+<title>Andréas Brey, ingénieur front-end, accessibilité et IA</title>
+<meta name="description" content="Ingénieur front-end senior à Strasbourg. Accessibilité web (WCAG 2.2, EN 301 549, RGAA), développement avec des agents IA, architecture JavaScript.">
 <meta name="author" content="Andréas Brey">
 <link rel="canonical" href="https://andreas-brey.vercel.app/">
 <link rel="alternate" hreflang="fr" href="https://andreas-brey.vercel.app/?lang=fr">
@@ -13,16 +13,38 @@
 <link rel="alternate" hreflang="x-default" href="https://andreas-brey.vercel.app/">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://andreas-brey.vercel.app/">
-<meta property="og:title" content="Andréas Brey, ingénieur front-end">
-<meta property="og:description" content="Seize ans de développement, onze sur le même client web. Accessibilité, performance, architecture JavaScript.">
+<meta property="og:title" content="Andréas Brey, ingénieur front-end, accessibilité et IA">
+<meta property="og:description" content="Accessibilité web (WCAG 2.2, EN 301 549, RGAA), développement avec des agents IA, architecture JavaScript. Seize ans de métier, onze sur le même produit.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
 <meta property="og:image" content="https://andreas-brey.vercel.app/img/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Andréas Brey, ingénieur front-end senior spécialisé accessibilité, Strasbourg">
+<meta property="og:image:alt" content="Andréas Brey, ingénieur front-end senior, référent accessibilité et développement agentique, Strasbourg">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Données structurées pour les moteurs de recherche. L'adresse email n'y
+     figure pas, pour la même raison qu'elle n'est pas écrite dans la page. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Andréas Brey",
+  "url": "https://andreas-brey.vercel.app/",
+  "image": "https://andreas-brey.vercel.app/img/portrait.webp",
+  "jobTitle": "Ingénieur front-end senior",
+  "worksFor": { "@type": "Organization", "name": "Four J's Development Tools" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Strasbourg", "addressCountry": "FR" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Conservatoire National des Arts et Métiers" },
+  "knowsLanguage": ["fr", "en"],
+  "knowsAbout": ["Accessibilité numérique", "WCAG 2.2", "WAI-ARIA", "EN 301 549", "RGAA", "JavaScript", "TypeScript", "Développement agentique"],
+  "sameAs": [
+    "https://www.linkedin.com/in/andreas-brey-a64134b9",
+    "https://github.com/andreas-brey",
+    "https://github.com/Fulgurus"
+  ]
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%230D4853'/%3E%3Cpath d='M5.5 24 L11 8 L14 8 L19.5 24' fill='none' stroke='%23EDEFE9' stroke-width='2.3' stroke-linecap='square'/%3E%3Cpath d='M8.3 19 L16.7 19' stroke='%23EDEFE9' stroke-width='2.3'/%3E%3Cpath d='M22 24 L22 8 L25 8 A4 4 0 0 1 25 15.5 L22 15.5 A4.25 4.25 0 0 1 25.5 24 Z' fill='%23EDEFE9'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/atkinson-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>
@@ -287,6 +309,16 @@ a:hover { text-decoration-thickness: 2px; }
   font-size: clamp(1.1875rem, 3vw, 1.5rem);
   line-height: 1.42;
 }
+/* Raccourci vers le contact : même hauteur de cible que les boutons. */
+.contact-jump {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+}
 
 /* ---------- Frise de mesure ----------
    Au-dessus de 34rem, chaque segment occupe une largeur proportionnelle à sa
@@ -517,7 +549,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
 }
 
 @media print {
-  .toolbar, .skip-link, .copy-btn { display: none; }
+  .toolbar, .skip-link, .copy-btn, .contact-jump { display: none; }
 }
 </style>
 </head>
@@ -540,9 +572,10 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     <img class="portrait" id="portrait" src="img/portrait.webp" alt="" width="420" height="420" fetchpriority="high" decoding="async">
     <div class="ident">
       <h1>Andréas Brey</h1>
-      <p class="role" data-i18n="role">Ingénieur front-end senior, spécialisé accessibilité</p>
+      <p class="role" data-i18n="role">Ingénieur front-end senior, référent accessibilité et développement agentique</p>
       <p class="place" data-i18n="place">Strasbourg, Grand Est, France</p>
-      <p class="tagline" data-i18n="tagline">Onze ans sur le même client web, utilisé chaque jour par des entreprises dans le monde entier. Accessibilité, performance, architecture front-end.</p>
+      <p class="tagline" data-i18n="tagline">Je rends accessibles des applications web que des entreprises utilisent chaque jour dans le monde entier, et je travaille avec des agents IA sans rien livrer que je n'aie vérifié.</p>
+      <a class="contact-jump" href="#s-contact" data-i18n="contactJump">Me contacter</a>
     </div>
   </header>
 
@@ -585,14 +618,16 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
         <h3 data-i18n="a11yTitle">Accessibilité</h3>
         <p class="lead" data-i18n="a11yBody">WCAG, ARIA, navigation au clavier, lecteurs d'écran. Je la traite dans le code, mais surtout avant le code : audits, tests automatisés dans la chaîne d'intégration, revues d'ergonomie avec l'équipe produit. C'est la partie du métier où je vais le plus loin, et celle qui change le plus le résultat pour l'utilisateur.</p>
         <p data-i18n="a11yBody2">Le travail utile commence là où les outils s'arrêtent : savoir ce qu'un lecteur d'écran annonce vraiment, et pouvoir contredire une règle de lint, spécification à l'appui, quand elle signale un faux positif.</p>
+        <p data-i18n="a11yStandards">Référentiels pratiqués : WCAG 2.2 (niveau AA), WAI-ARIA et ARIA Authoring Practices, EN 301 549, RGAA 4.1.2. En veille : RGAA 5 (publication annoncée fin 2026) et WCAG 3 (brouillon W3C).</p>
       </article>
       <article class="entry">
         <h3 data-i18n="jsTitle">JavaScript sur la durée</h3>
         <p class="lead" data-i18n="jsBody">Quatorze ans à écrire du JavaScript, et surtout à le maintenir. J'ai commencé quand la compatibilité navigateurs se faisait à la main, Internet Explorer 6 compris. J'ai vu passer assez de frameworks pour savoir ce qui reste : la plateforme. J'adopte un outil quand il règle un problème que j'ai vraiment.</p>
       </article>
       <article class="entry">
-        <h3 data-i18n="aiTitle">L'IA, outil de travail</h3>
-        <p class="lead" data-i18n="aiBody">Je m'en sers tous les jours : revue de code, génération et conversion de tests end to end, analyse de bases de code que plus personne ne connaît, documentation technique. Le temps gagné est réel, à condition de savoir où l'outil se trompe. Rien de généré n'entre sans un test qui échoue avant et qui passe après.</p>
+        <h3 data-i18n="aiTitle">Le développement avec des agents IA</h3>
+        <p class="lead" data-i18n="aiBody">Je travaille tous les jours avec des agents de code : plusieurs sessions en parallèle, chacune sur sa copie du dépôt, pour corriger, tester ou relire. J'écris aussi ce qui les encadre : des skills partagés avec l'équipe (revue d'accessibilité sourcée, tests end to end, rédaction de tickets), des garde-fous automatiques, des règles de projet.</p>
+        <p data-i18n="aiBody2">Le temps gagné est réel, à condition de rester le juge. Un défaut se reproduit avant d'être corrigé, un correctif passe devant plusieurs agents vérificateurs, et rien de généré n'entre sans un test qui échoue avant et qui passe après.</p>
       </article>
     </div>
   </section>
@@ -642,7 +677,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
       </div>
       <div class="skill">
         <h3 data-i18n="sk2Title">Accessibilité</h3>
-        <p data-i18n="sk2Items">WCAG 2.2, ARIA, navigation au clavier, lecteurs d'écran, audits et revues</p>
+        <p data-i18n="sk2Items">WCAG 2.2 AA, WAI-ARIA, EN 301 549, RGAA 4.1.2, navigation au clavier, lecteurs d'écran (NVDA), axe, audits et revues</p>
       </div>
       <div class="skill">
         <h3 data-i18n="sk3Title">Tests et qualité</h3>
@@ -651,6 +686,10 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
       <div class="skill">
         <h3 data-i18n="sk4Title">Architecture et performance</h3>
         <p data-i18n="sk4Items">Architecture front-end à grande échelle, performance navigateur, compatibilité multi-navigateurs, Vite et chaîne de build</p>
+      </div>
+      <div class="skill">
+        <h3 data-i18n="sk5Title">Développement agentique</h3>
+        <p data-i18n="sk5Items">Claude Code, skills, hooks, MCP, orchestration multi-agents</p>
       </div>
     </div>
   </section>
@@ -737,9 +776,10 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   const EN = {
     skip: "Skip to main content",
     langLabel: "Français",
-    role: "Senior front-end engineer, accessibility specialist",
+    role: "Senior front-end engineer, accessibility and agentic development",
     place: "Strasbourg, eastern France",
-    tagline: "Eleven years on the same web client, used every day by companies around the world. Accessibility, performance, front-end architecture.",
+    tagline: "I make accessible the web applications that companies around the world use every day, and I work with AI agents without shipping anything I have not verified.",
+    contactJump: "Get in touch",
     seg1: "Contract .NET work",
     seg2: "Ortho Clinical Diagnostics",
     seg3: "Four J's Development Tools",
@@ -753,10 +793,12 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     a11yTitle: "Accessibility",
     a11yBody: "WCAG, ARIA, keyboard navigation, screen readers. I handle it in the code, but mostly before the code: audits, automated checks in the build pipeline, design reviews with the product team. It is the part of the job I go deepest on, and the one that changes the most for the people using the product.",
     a11yBody2: "The useful work starts where the tooling stops: knowing what a screen reader actually announces, and being able to argue a lint rule down, specification in hand, when it flags a false positive.",
+    a11yStandards: "Standards I work with: WCAG 2.2 (level AA), WAI-ARIA and the ARIA Authoring Practices, EN 301 549, RGAA 4.1.2 (the French accessibility framework). Keeping track of: RGAA 5 (announced for late 2026) and WCAG 3 (W3C draft).",
     jsTitle: "JavaScript for the long run",
     jsBody: "Fourteen years writing JavaScript, and above all maintaining it. I started when browser compatibility was done by hand, Internet Explorer 6 included. I have watched enough frameworks come and go to know what stays: the platform itself. I pick up a tool when it solves a problem I actually have.",
-    aiTitle: "AI as a working tool",
-    aiBody: "I use it daily: code review, writing and converting end to end tests, digging through codebases nobody remembers, technical documentation. The time it saves is real, provided you know where the tool gets things wrong. Nothing generated ships without a test that failed before and passes after.",
+    aiTitle: "Building with AI agents",
+    aiBody: "I work with coding agents every day: several sessions in parallel, each on its own copy of the repository, fixing, testing or reviewing. I also write what keeps them in line: skills shared with the team (source-backed accessibility review, end to end tests, ticket writing), automatic guardrails, project rules.",
+    aiBody2: "The time it saves is real, provided you stay the judge. A defect is reproduced before it is fixed, a fix goes past several verifier agents, and nothing generated ships without a test that failed before and passes after.",
     careerTitle: "Career",
     c1Title: "Contract .NET work, on customer sites",
     c1Context: "C#, WPF, Silverlight. Line of business applications delivered straight to the people who would use them.",
@@ -779,11 +821,13 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     sk1Title: "Core",
     sk1Items: "JavaScript, TypeScript, SCSS, browser APIs, web standards",
     sk2Title: "Accessibility",
-    sk2Items: "WCAG 2.2, ARIA, keyboard navigation, screen readers, audits and reviews",
+    sk2Items: "WCAG 2.2 AA, WAI-ARIA, EN 301 549, RGAA 4.1.2, keyboard navigation, screen readers (NVDA), axe, audits and reviews",
     sk3Title: "Testing and quality",
     sk3Items: "Vitest for unit tests, Playwright and TestCafe for end to end, code review, automated checks",
     sk4Title: "Architecture and performance",
     sk4Items: "Large scale front-end architecture, browser performance, cross-browser compatibility, Vite and build tooling",
+    sk5Title: "Agentic development",
+    sk5Items: "Claude Code, skills, hooks, MCP, multi-agent orchestration",
     projectsTitle: "Projects",
     auditTitle: "An accessibility audit tool",
     auditBody: "An automated audit suite, built with Playwright, that walks a site and reports its accessibility defects with no setup: around twenty analysis modules, close to sixty rules, and a clear line between what actually blocks someone and what needs a human look.",
@@ -810,7 +854,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     langSwitched: "Page language changed to English.",
     toDark: "Dark theme",
     toLight: "Light theme",
-    title: "Andréas Brey, front-end engineer"
+    title: "Andréas Brey, front-end engineer, accessibility and AI"
   };
 
   const FR = {
@@ -823,7 +867,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     langSwitched: "Langue de la page passée en français.",
     toDark: "Thème sombre",
     toLight: "Thème clair",
-    title: "Andréas Brey, ingénieur front-end"
+    title: "Andréas Brey, ingénieur front-end, accessibilité et IA"
   };
 
   /* Le français affiché fait foi : on le relève une fois pour pouvoir y revenir. */
