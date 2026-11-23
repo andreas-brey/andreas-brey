@@ -329,7 +329,7 @@ a:hover { text-decoration-thickness: 2px; }
 .measure-bar {
   position: relative;
   display: flex;
-  margin-top: 2.4rem;
+  margin-top: 5.2rem;
   border-block: 1px solid var(--rule);
   border-inline-start: 1px solid var(--rule);
 }
@@ -377,6 +377,30 @@ a:hover { text-decoration-thickness: 2px; }
   color: var(--accent);
   white-space: nowrap;
 }
+/* Jalons techniques : le miroir du repère de 2012. Chaque trait tombe sur son
+   année, le libellé s'écrit à sa gauche et monte d'un cran pour ne pas croiser
+   les autres. */
+.mark {
+  position: absolute;
+  /* 0.825rem : la hauteur d'une ligne de libellé. La boîte ne couvre que son
+     libellé, le trait est dessiné à part pour ne recouvrir aucun autre texte. */
+  bottom: calc(100% + var(--rise) - 0.825rem);
+  display: flex;
+  padding-inline-end: 0.45rem;
+  transform: translateX(-100%);
+}
+.mark::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: var(--rise);
+  border-inline-end: 2px dotted var(--accent);
+}
+/* 2024, 2025 et 2026 sur l'échelle de seize ans. */
+.mark:nth-child(1) { left: 87.5%; --rise: 2.4rem; }
+.mark:nth-child(2) { left: 93.75%; --rise: 3.8rem; }
+.mark:nth-child(3) { left: 100%; --rise: 5.2rem; }
 .measure figcaption {
   margin-top: 1.1rem;
   max-width: 58ch;
@@ -406,6 +430,14 @@ a:hover { text-decoration-thickness: 2px; }
     padding: 0.5rem 0 0;
     border-inline-start: 0;
   }
+  .mark {
+    position: static;
+    display: block;
+    padding: 0.35rem 0 0;
+    transform: none;
+  }
+  .mark::after { content: none; }
+  .mark .tick-label { white-space: normal; }
   .scale-note { display: none; }
 }
 
@@ -595,9 +627,18 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
       <div class="measure-seg">
         <span class="seg-years"><span>2015</span><span>2026</span></span>
         <span class="seg-name" data-i18n="seg3">Four J's Development Tools</span>
+        <!-- Comme le repère de 2012, les jalons vivent dans leur segment : posés
+             sur l'échelle en grand écran, listés sous lui une fois empilés. -->
+        <span class="marks">
+          <span class="mark"><span class="tick-label">2024 · Vite</span></span>
+          <span class="mark"><span class="tick-label" data-i18n="mark2">2025 · Accessibilité critère produit, TestCafe</span></span>
+          <span class="mark"><span class="tick-label" data-i18n="mark3">2026 · Playwright, outil d'audit</span></span>
+        </span>
       </div>
     </div>
     <figcaption>
+      <!-- La frise est masquée aux lecteurs d'écran : ses jalons sont redits ici. -->
+      <span class="visually-hidden" data-i18n="marksAlt">Jalons techniques : Vite en 2024, accessibilité devenue critère produit et TestCafe en 2025, Playwright et outil d'audit en 2026.</span>
       <span data-i18n="measureCaption">Seize ans de métier, trois employeurs, un seul produit depuis 2015.</span>
       <span class="scale-note" data-i18n="scaleNote">L'échelle ci-dessus est proportionnelle à la durée réelle de chaque période.</span>
     </figcaption>
@@ -655,7 +696,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
         <ul class="shifts">
           <li data-i18n="shift1">Migration de la chaîne de build vers Vite</li>
           <li data-i18n="shift2">Arrivée de TypeScript sur le code et les tests</li>
-          <li data-i18n="shift3">Refonte de la suite end to end, de Protractor vers TestCafe</li>
+          <li data-i18n="shift3">Refonte de la suite end to end, de Protractor vers TestCafe puis Playwright</li>
           <li data-i18n="shift4">L'accessibilité passée du correctif au critère produit</li>
         </ul>
       </article>
@@ -701,7 +742,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
       <h3 data-i18n="auditTitle">Un outil d'audit d'accessibilité</h3>
       <p class="lead" data-i18n="auditBody">Une suite d'audit automatisée, écrite avec Playwright, qui parcourt un site et remonte ses défauts d'accessibilité sans configuration préalable : une vingtaine de modules d'analyse, près de soixante règles, et une séparation nette entre ce qui bloque vraiment un utilisateur et ce qui mérite un examen humain.</p>
       <p data-i18n="auditBody2">Née d'un constat de terrain : les outils génériques produisent beaucoup de faux positifs, et passent à côté de ce qui gêne réellement à l'usage.</p>
-      <p class="aside-note" data-i18n="auditNote">Outil interne, non publié. Je le montre volontiers en entretien.</p>
+      <p class="aside-note" data-i18n="auditNote">Outil interne, non publié.</p>
     </article>
     <div class="aside">
       <h3 data-i18n="web3Title">Une parenthèse Web3, 2021-2022</h3>
@@ -784,6 +825,9 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     seg2: "Ortho Clinical Diagnostics",
     seg3: "Four J's Development Tools",
     tick: "CNAM engineering degree, June 2012",
+    mark2: "2025 · Accessibility as a product requirement, TestCafe",
+    mark3: "2026 · Playwright, audit tool",
+    marksAlt: "Technical milestones: Vite in 2024, accessibility as a product requirement and TestCafe in 2025, Playwright and the audit tool in 2026.",
     measureCaption: "Sixteen years in the trade, three employers, one product since 2015.",
     scaleNote: "The scale above is proportional to how long each period actually lasted.",
     introTitle: "In brief",
@@ -812,7 +856,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     c3Focus: "Front-end architecture, performance, accessibility. Eleven years on one codebase: I still run into decisions I made five years ago.",
     shift1: "Build tooling migrated to Vite",
     shift2: "TypeScript brought into the code and the tests",
-    shift3: "End to end suite rebuilt, from Protractor to TestCafe",
+    shift3: "End to end suite rebuilt, from Protractor to TestCafe, then Playwright",
     shift4: "Accessibility moved from bug fixing to product requirement",
     eduTitle: "Education",
     eduBody: "Engineering degree in computer science, Conservatoire National des Arts et Métiers, June 2012. ITII Alsace programme.",
@@ -832,7 +876,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     auditTitle: "An accessibility audit tool",
     auditBody: "An automated audit suite, built with Playwright, that walks a site and reports its accessibility defects with no setup: around twenty analysis modules, close to sixty rules, and a clear line between what actually blocks someone and what needs a human look.",
     auditBody2: "It came out of a field observation: generic tools raise a lot of false positives, and miss what really gets in the way.",
-    auditNote: "Internal tool, not published. Happy to walk through it in an interview.",
+    auditNote: "Internal tool, not published.",
     web3Title: "A Web3 detour, 2021-2022",
     web3Body: "Co-founder of two NFT collections on Solana, The Outfit and Gatsby Club, plus launch support for other projects: candy machine, storefront, mint. As much a founder's experience as an engineer's, in a setting where everything had to hold on launch day. A closed chapter.",
     offscreenTitle: "Away from the code",
