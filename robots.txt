@@ -1,0 +1,5 @@
+# Tous les robots sont les bienvenus, ceux des moteurs d'IA compris.
+User-agent: *
+Allow: /
+
+Sitemap: https://andreas-brey.vercel.app/sitemap.xml
