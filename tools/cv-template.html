@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="author" content="Andréas Brey">
+<title>CV - Andréas Brey - Ingénieur front-end senior</title>
+<!-- Source de cv/andreas-brey-cv.pdf. Après une modification, régénérer le PDF
+     avec cv-render.cjs : il est balisé (structure, langue, titre) parce que
+     cette page l'est. Polices, couleurs et fond clair sont ceux du site. -->
+<style>
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-weight: 400 700;
+  src: url("../fonts/atkinson-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-weight: 400 700;
+  src: url("../fonts/atkinson-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "DM Mono";
+  font-weight: 400;
+  src: url("../fonts/dmmono-latin.woff2") format("woff2");
+}
+
+/* Fond à fond perdu : sans marge de page, le fond posé sur la racine couvre
+   toute la feuille, et les marges sont recréées par le padding du body. */
+@page { size: A4; margin: 0; }
+
+:root {
+  background: #EDEFE9;
+  --ink: #1A231F;
+  --ink-muted: #3E4741;
+  --rule: #6C766F;
+  --accent: #0D4853;
+  --mono: "DM Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  padding: 15mm 17mm 14mm;
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible Next", sans-serif;
+  font-size: 9.75pt;
+  line-height: 1.45;
+}
+a { color: var(--accent); text-underline-offset: 0.15em; }
+
+/* ---------- En-tête ---------- */
+header { padding-top: 5mm; border-top: 2px solid var(--accent); }
+h1 { font-size: 27pt; line-height: 1.05; letter-spacing: -0.02em; }
+.role { margin-top: 1.5mm; font-size: 12pt; color: var(--accent); }
+.contact {
+  margin-top: 1.5mm;
+  font-family: var(--mono);
+  font-size: 8.25pt;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+.facts { margin-top: 5mm; font-weight: 700; color: var(--accent); }
+.pitch { margin-top: 1mm; max-width: 62em; }
+
+/* ---------- Sections ---------- */
+h2 {
+  margin: 6mm 0 2.5mm;
+  padding-bottom: 1mm;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 8.5pt;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Expertises : une liste, mise en deux colonnes par la grille. */
+.skills { list-style: none; }
+.skills li {
+  display: grid;
+  grid-template-columns: 38mm minmax(0, 1fr);
+  gap: 4mm;
+  padding: 1.2mm 0;
+  border-bottom: 1px solid #C9CEC4;
+}
+.skills li:last-child { border-bottom: 0; }
+
+/* Expérience */
+.job + .job { margin-top: 4mm; }
+.job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; }
+h3 { font-size: 11pt; line-height: 1.25; }
+.when {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 8.25pt;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
+.org { color: var(--accent); }
+.job ul { margin: 1mm 0 0 4.5mm; }
+.job li { padding-left: 1mm; }
+.job li + li { margin-top: 0.6mm; }
+.job li::marker { color: var(--accent); }
+
+.note { margin-top: 1.5mm; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Andréas Brey</h1>
+  <p class="role">Ingénieur front-end senior · Référent accessibilité · Développement agentique</p>
+  <p class="contact">Strasbourg, Grand Est · <a href="https://andreas-brey.vercel.app/">andreas-brey.vercel.app</a> · <a href="https://www.linkedin.com/in/andreas-brey-a64134b9">LinkedIn</a></p>
+</header>
+
+<main>
+  <p class="facts">16 ans d’expérience · 14 ans de JavaScript · 11 ans sur un produit international</p>
+  <p class="pitch">Je conçois et fais évoluer des applications front-end utilisées à grande échelle. Mon approche associe architecture pérenne, accessibilité intégrée au produit et développement agentique maîtrisé par les tests.</p>
+
+  <section aria-labelledby="h-skills">
+    <h2 id="h-skills">Expertises</h2>
+    <ul class="skills">
+      <li><strong>Front-end</strong><span>JavaScript (14 ans), TypeScript, SCSS, APIs navigateur, standards du Web, Vite</span></li>
+      <li><strong>Accessibilité</strong><span>WCAG 2.2 AA, WAI-ARIA, EN 301 549, RGAA 4.1.2 ; audits, clavier, NVDA, axe</span></li>
+      <li><strong>IA agentique</strong><span>Claude Code, orchestration multi-agents, skills, hooks, MCP ; garde-fous et validation du code généré</span></li>
+      <li><strong>Qualité et performance</strong><span>Playwright, Vitest, TestCafe, tests end-to-end, performance navigateur, compatibilité multi-navigateurs</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-jobs">
+    <h2 id="h-jobs">Expérience professionnelle</h2>
+    <article class="job">
+      <div class="job-head">
+        <h3>Ingénieur front-end</h3>
+        <p class="when">Depuis 2015</p>
+      </div>
+      <p class="org">Four J’s Development Tools</p>
+      <ul>
+        <li>Développement et maintenance d’un client web utilisé quotidiennement dans le monde entier, au sein d’une équipe produit internationale (anglais).</li>
+        <li>Architecture et performance front-end ; migration vers Vite et introduction de TypeScript dans le code et les tests.</li>
+        <li>Tests end-to-end : Protractor, TestCafe puis Playwright ; accessibilité intégrée comme critère produit.</li>
+        <li>Outil interne d’audit d’accessibilité sous Playwright : une vingtaine de modules et près de 60 règles.</li>
+        <li>Développement agentique au quotidien : agents en parallèle, skills et garde-fous partagés, validation par tests de non-régression.</li>
+      </ul>
+    </article>
+    <article class="job">
+      <div class="job-head">
+        <h3>Développeur web JavaScript</h3>
+        <p class="when">2012 à 2015</p>
+      </div>
+      <p class="org">Ortho Clinical Diagnostics · Diagnostic médical</p>
+      <ul>
+        <li>Développement d’applications web JavaScript dans le secteur du diagnostic médical.</li>
+      </ul>
+    </article>
+    <article class="job">
+      <div class="job-head">
+        <h3>Développeur .NET</h3>
+        <p class="when">2010 à 2011</p>
+      </div>
+      <p class="org">Missions chez les clients finaux</p>
+      <ul>
+        <li>Développement et livraison d’applications métier avec C#, WPF et Silverlight, au contact des utilisateurs finaux.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section aria-labelledby="h-edu">
+    <h2 id="h-edu">Formation</h2>
+    <p><strong>Ingénieur en informatique</strong> · Conservatoire National des Arts et Métiers (CNAM), juin 2012 · Formation ITII Alsace</p>
+    <p class="note">Environnement de travail : équipe produit internationale, échanges et collaboration en anglais.</p>
+  </section>
+</main>
+
+</body>
+</html>
