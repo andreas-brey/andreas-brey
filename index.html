@@ -4,16 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>Andréas Brey, ingénieur front-end, accessibilité et IA</title>
-<meta name="description" content="Ingénieur front-end senior à Strasbourg. Accessibilité web (WCAG 2.2, EN 301 549, RGAA), développement avec des agents IA, architecture JavaScript.">
+<title>Andréas Brey, ingénieur front-end, accessibilité RGAA et IA</title>
+<meta name="description" content="Ingénieur front-end senior à Strasbourg, référent accessibilité. Audits RGAA et WCAG, mise en conformité en mission de conseil, développement avec des agents IA.">
 <meta name="author" content="Andréas Brey">
+<!-- Une page HTML par langue : en/index.html est générée depuis celle-ci par
+     tools/build-en.cjs, à relancer après toute modification. -->
 <link rel="canonical" href="https://andreas-brey.vercel.app/">
-<link rel="alternate" hreflang="fr" href="https://andreas-brey.vercel.app/?lang=fr">
-<link rel="alternate" hreflang="en" href="https://andreas-brey.vercel.app/?lang=en">
+<link rel="alternate" hreflang="fr" href="https://andreas-brey.vercel.app/">
+<link rel="alternate" hreflang="en" href="https://andreas-brey.vercel.app/en/">
 <link rel="alternate" hreflang="x-default" href="https://andreas-brey.vercel.app/">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://andreas-brey.vercel.app/">
-<meta property="og:title" content="Andréas Brey, ingénieur front-end, accessibilité et IA">
+<meta property="og:title" content="Andréas Brey, ingénieur front-end, accessibilité RGAA et IA">
 <meta property="og:description" content="Accessibilité web (WCAG 2.2, EN 301 549, RGAA), développement avec des agents IA, architecture JavaScript. Seize ans de métier, onze sur le même produit.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
@@ -33,11 +35,16 @@
   "url": "https://andreas-brey.vercel.app/",
   "image": "https://andreas-brey.vercel.app/img/portrait.webp",
   "jobTitle": "Ingénieur front-end senior",
+  "description": "Ingénieur front-end senior et référent accessibilité. Audits RGAA et WCAG, mise en conformité en mission de conseil.",
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": { "@type": "Service", "name": "Audit et mise en conformité accessibilité (RGAA, WCAG)", "areaServed": "FR" }
+  },
   "worksFor": { "@type": "Organization", "name": "Four J's Development Tools" },
   "address": { "@type": "PostalAddress", "addressLocality": "Strasbourg", "addressCountry": "FR" },
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Conservatoire National des Arts et Métiers" },
   "knowsLanguage": ["fr", "en"],
-  "knowsAbout": ["Accessibilité numérique", "WCAG 2.2", "WAI-ARIA", "EN 301 549", "RGAA", "JavaScript", "TypeScript", "Développement agentique"],
+  "knowsAbout": ["Accessibilité numérique", "Audit RGAA", "WCAG 2.2", "WAI-ARIA", "EN 301 549", "RGAA", "JavaScript", "TypeScript", "Développement agentique"],
   "sameAs": [
     "https://www.linkedin.com/in/andreas-brey-a64134b9",
     "https://github.com/andreas-brey",
@@ -46,11 +53,17 @@
 }
 </script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%230D4853'/%3E%3Cpath d='M5.5 24 L11 8 L14 8 L19.5 24' fill='none' stroke='%23EDEFE9' stroke-width='2.3' stroke-linecap='square'/%3E%3Cpath d='M8.3 19 L16.7 19' stroke='%23EDEFE9' stroke-width='2.3'/%3E%3Cpath d='M22 24 L22 8 L25 8 A4 4 0 0 1 25 15.5 L22 15.5 A4.25 4.25 0 0 1 25.5 24 Z' fill='%23EDEFE9'/%3E%3C/svg%3E">
-<link rel="preload" href="fonts/atkinson-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/atkinson-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>
 /* Restaure le thème choisi avant le premier rendu, pour éviter un flash.
    Encapsulé : rien ne doit atteindre l'objet global. */
 (function () {
+  /* Anciens liens en ?lang= : renvoi vers la page de la langue demandée. */
+  var requested = new URLSearchParams(location.search).get("lang");
+  if ((requested === "en" || requested === "fr") && document.documentElement.lang !== requested) {
+    location.replace(requested === "en" ? "/en/" : "/");
+    return;
+  }
   try {
     var saved = localStorage.getItem("theme");
     if (saved !== "dark" && saved !== "light") { return; }
@@ -75,7 +88,7 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url("fonts/atkinson-latin.woff2") format("woff2");
+  src: url("/fonts/atkinson-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
@@ -83,7 +96,7 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url("fonts/atkinson-latin-ext.woff2") format("woff2");
+  src: url("/fonts/atkinson-latin-ext.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
@@ -91,7 +104,7 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/atkinson-italic-latin.woff2") format("woff2");
+  src: url("/fonts/atkinson-italic-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
@@ -99,7 +112,7 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/atkinson-italic-latin-ext.woff2") format("woff2");
+  src: url("/fonts/atkinson-italic-latin-ext.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
@@ -107,7 +120,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/dmmono-latin.woff2") format("woff2");
+  src: url("/fonts/dmmono-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
@@ -115,7 +128,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/dmmono-latin-ext.woff2") format("woff2");
+  src: url("/fonts/dmmono-latin-ext.woff2") format("woff2");
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -232,9 +245,10 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 /* ---------- Barre d'outils ----------
-   Les deux boutons ne servent à rien sans JavaScript : ils ne sont donc
-   révélés que par lui. La hauteur est réservée d'avance pour que cette
-   révélation ne décale rien. */
+   Le bouton de thème ne sert à rien sans JavaScript : la barre n'est donc
+   révélée que par lui. Sans JavaScript, les robots trouvent quand même la
+   page de l'autre langue par le lien de la barre et les liens hreflang. La
+   hauteur est réservée d'avance pour que cette révélation ne décale rien. */
 .topbar { min-height: var(--toolbar-h); }
 .toolbar {
   display: flex;
@@ -245,7 +259,11 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .toolbar[hidden] { display: none; }
 
-.toolbar button, .copy-btn {
+/* Le lien de langue a l'allure des boutons : il change de page, le thème
+   change d'état, mais les deux se rangent côte à côte. */
+.toolbar :is(a, button), .copy-btn {
+  display: inline-flex;
+  align-items: center;
   font: inherit;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -256,9 +274,10 @@ a:hover { text-decoration-thickness: 2px; }
   border-radius: 2px;
   padding: 0.5rem 0.75rem;
   min-height: 2.75rem;
+  text-decoration: none;
   cursor: pointer;
 }
-.toolbar button:hover, .copy-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
+.toolbar :is(a, button):hover, .copy-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
 
 /* ---------- En-tête ---------- */
 .masthead {
@@ -651,7 +670,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
 
 <header class="shell topbar">
   <div class="toolbar" id="toolbar" hidden>
-    <button type="button" id="lang-btn" lang="en" data-i18n="langLabel">English</button>
+    <a href="/en/" hreflang="en" lang="en" data-i18n="langLabel">English</a>
     <button type="button" id="theme-btn"></button>
   </div>
 </header>
@@ -661,14 +680,14 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   <header class="masthead">
     <!-- alt vide et assumé : le nom est juste à côté dans le h1, un texte de
          remplacement le ferait répéter deux fois par un lecteur d'écran. -->
-    <img class="portrait" id="portrait" src="img/portrait.webp" alt="" width="420" height="420" fetchpriority="high" decoding="async">
+    <img class="portrait" id="portrait" src="/img/portrait.webp" alt="" width="420" height="420" fetchpriority="high" decoding="async">
     <div class="ident">
       <h1>Andréas Brey</h1>
       <p class="role" data-i18n="role">Ingénieur front-end senior, référent accessibilité et développement agentique</p>
       <p class="place" data-i18n="place">Strasbourg, Grand Est, France</p>
       <p class="tagline" data-i18n="tagline">Je rends accessibles des applications web que des entreprises utilisent chaque jour dans le monde entier, et je travaille avec des agents IA sans rien livrer que je n'aie vérifié.</p>
       <p class="jumps">
-        <a class="cv-link" href="cv/andreas-brey-cv.pdf" type="application/pdf" hreflang="fr" data-i18n="cvLink">Mon CV (PDF, 108 Ko)</a>
+        <a class="cv-link" href="/cv/andreas-brey-cv.pdf" type="application/pdf" hreflang="fr" rel="noopener" target="_blank"><span data-i18n="cvLink">Mon CV (PDF, 108 Ko)</span><span class="visually-hidden" data-i18n="newTab">ouvre un nouvel onglet</span></a>
         <a href="#s-contact" data-i18n="contactJump">Me contacter</a>
       </p>
     </div>
@@ -897,172 +916,42 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
 
   const root = document.documentElement;
   const announcer = document.getElementById("announcer");
-  const langBtn = document.getElementById("lang-btn");
   const themeBtn = document.getElementById("theme-btn");
   const readout = document.getElementById("readout");
-  const cvLink = document.querySelector(".cv-link");
 
-  /* ------------------------------ Traductions ------------------------------
-     Le français est dans le HTML : sans JavaScript la page reste complète et
-     lisible. L'anglais est appliqué par substitution sur les mêmes noeuds. */
-  const EN = {
-    skip: "Skip to main content",
-    langLabel: "Français",
-    role: "Senior front-end engineer, accessibility and agentic development",
-    place: "Strasbourg, eastern France",
-    tagline: "I make accessible the web applications that companies around the world use every day, and I work with AI agents without shipping anything I have not verified.",
-    contactJump: "Get in touch",
-    cvLink: "My CV (PDF, 100 KB)",
-    seg1: "Contract .NET work",
-    seg2: "Ortho Clinical Diagnostics",
-    seg3: "Four J's Development Tools",
-    tick: "CNAM engineering degree, June 2012",
-    mark2: "2025 · Accessibility as a product requirement, TestCafe",
-    mark3: "2026 · Playwright, audit tool",
-    marksAlt: "Technical milestones: Vite in 2024, accessibility as a product requirement and TestCafe in 2025, Playwright and the audit tool in 2026.",
-    measureCaption: "Sixteen years in the trade, three employers, one product since 2015.",
-    scaleNote: "The scale above is proportional to how long each period actually lasted.",
-    introTitle: "In brief",
-    intro: "I have been building web interfaces for sixteen years, almost always in JavaScript. Since 2015 I have worked at Four J's Development Tools on a web client that companies around the world use every day. The work comes down to three questions: does it hold up under load, will it still be maintainable in five years, and can everyone actually use it, keyboard and screen reader included.",
-    quote: "The kind of work where you live with your own code for years, and where one bad technical call keeps costing you for just as long.",
-    dykTitle: "Did you know?",
-    dykLead: "In France, digital accessibility is a legal obligation, checked and enforced, and no longer for the public sector alone.",
-    dl1Date: "2023",
-    dl1: "Arcom, the French digital regulator, audits public websites and apps, with fines of up to €50,000.",
-    dl2Date: "June 2025",
-    dl2: "The European Accessibility Act reaches the private sector: e-commerce, banking, transport, telecoms.",
-    dl3Date: "Dec 2026",
-    dl3: "RGAA 5, the French framework aligned with WCAG 2.2, is due; a decree is expected in 2027.",
-    dl4Date: "June 2030",
-    dl4: "End of the transition for services already in place.",
-    offerLead: "Accessibility specialist and hands-on front-end engineer, I can help as a consultant: RGAA and WCAG audits, an action plan, fixes in the code and automated tests.",
-    offerCta: "Let's talk about your compliance",
-    workTitle: "What I actually do",
-    a11yTitle: "Accessibility",
-    a11yBody: "WCAG, ARIA, keyboard navigation, screen readers. I handle it in the code, but mostly before the code: audits, automated checks in the build pipeline, design reviews with the product team. It is the part of the job I go deepest on, and the one that changes the most for the people using the product.",
-    a11yBody2: "The useful work starts where the tooling stops: knowing what a screen reader actually announces, and being able to argue a lint rule down, specification in hand, when it flags a false positive.",
-    a11yStandards: "Standards I work with: WCAG 2.2 (level AA), WAI-ARIA and the ARIA Authoring Practices, EN 301 549, RGAA 4.1.2 (the French accessibility framework). Keeping track of: RGAA 5 (announced for late 2026) and WCAG 3 (W3C draft).",
-    jsTitle: "JavaScript for the long run",
-    jsBody: "Fourteen years writing JavaScript, and above all maintaining it. I started when browser compatibility was done by hand, Internet Explorer 6 included. I have watched enough frameworks come and go to know what stays: the platform itself. I pick up a tool when it solves a problem I actually have.",
-    aiTitle: "Building with AI agents",
-    aiBody: "I work with coding agents every day: several sessions in parallel, each on its own copy of the repository, fixing, testing or reviewing. I also write what keeps them in line: skills shared with the team (source-backed accessibility review, end to end tests, ticket writing), automatic guardrails, project rules.",
-    aiBody2: "The time it saves is real, provided you stay the judge. A defect is reproduced before it is fixed, a fix goes past several verifier agents, and nothing generated ships without a test that failed before and passes after.",
-    careerTitle: "Career",
-    c1Title: "Contract .NET work, on customer sites",
-    c1Context: "C#, WPF, Silverlight. Line of business applications delivered straight to the people who would use them.",
-    c1Focus: "First lesson that stuck: the interface decides whether a tool gets used, not the engine behind it.",
-    c2Title: "Ortho Clinical Diagnostics",
-    c2Context: "Three years of JavaScript web development in medical diagnostics, inside what was then a Johnson & Johnson subsidiary.",
-    c2Focus: "The move to front-end for good, in a field where a misread screen is not a small thing.",
-    c3When: "Since 2015",
-    c3Title: "Four J's Development Tools",
-    c3Context: "Building and evolving a web client that companies worldwide use every day, inside an international product team, in English.",
-    c3Focus: "Front-end architecture, performance, accessibility. Eleven years on one codebase: I still run into decisions I made five years ago.",
-    shift1: "Build tooling migrated to Vite",
-    shift2: "TypeScript brought into the code and the tests",
-    shift3: "End to end suite rebuilt, from Protractor to TestCafe, then Playwright",
-    shift4: "Accessibility moved from bug fixing to product requirement",
-    eduTitle: "Education",
-    eduBody: "Engineering degree in computer science, Conservatoire National des Arts et Métiers, June 2012. ITII Alsace programme.",
-    skillsTitle: "Skills",
-    skillsIntro: "What I actually use, sorted by what it is for rather than by keyword.",
-    sk1Title: "Core",
-    sk1Items: "JavaScript, TypeScript, SCSS, browser APIs, web standards",
-    sk2Title: "Accessibility",
-    sk2Items: "WCAG 2.2 AA, WAI-ARIA, EN 301 549, RGAA 4.1.2, keyboard navigation, screen readers (NVDA), axe, audits and reviews",
-    sk3Title: "Testing and quality",
-    sk3Items: "Vitest for unit tests, Playwright and TestCafe for end to end, code review, automated checks",
-    sk4Title: "Architecture and performance",
-    sk4Items: "Large scale front-end architecture, browser performance, cross-browser compatibility, Vite and build tooling",
-    sk5Title: "Agentic development",
-    sk5Items: "Claude Code, skills, hooks, MCP, multi-agent orchestration",
-    projectsTitle: "Projects",
-    auditTitle: "An accessibility audit tool",
-    auditBody: "An automated audit suite, built with Playwright, that walks a site and reports its accessibility defects with no setup: around twenty analysis modules, close to sixty rules, and a clear line between what actually blocks someone and what needs a human look.",
-    auditBody2: "It came out of a field observation: generic tools raise a lot of false positives, and miss what really gets in the way.",
-    auditNote: "Internal tool, not published.",
-    web3Title: "A Web3 detour, 2021-2022",
-    web3Body: "Co-founder of two NFT collections on Solana, The Outfit and Gatsby Club, plus launch support for other projects: candy machine, storefront, mint. As much a founder's experience as an engineer's, in a setting where everything had to hold on launch day. A closed chapter.",
-    offscreenTitle: "Away from the code",
-    offscreenBody: "Trail running and hiking, and a few backpacking treks a year with my family: you carry what you need and nothing more. Chess too, for the pleasure of moves whose consequences only show up much later.",
-    stillOnline: "Still online:",
-    contactTitle: "Contact",
-    contactBody: "Based in Strasbourg, used to working with a team spread across several countries. If your subject is accessibility, front-end architecture, or a codebase that has to last, get in touch.",
-    contactGithub: "Most of my work is proprietary and does not show up on GitHub, where you will mainly find personal projects. The andreas-brey account holds the recent ones, Fulgurus the older ones.",
-    newTab: "opens in a new tab",
+  /* -------------------------------- Langue --------------------------------
+     Une page HTML par langue : le texte est déjà dans la bonne langue, que le
+     JavaScript tourne ou non, et les robots qui ne l'exécutent pas lisent les
+     deux. Le script ne garde que les textes qu'il écrit lui-même. */
+  const lang = root.lang === "en" ? "en" : "fr";
+  const words = lang === "en" ? {
     copyLabel: "Copy email address",
     copyDone: "Email address copied",
-    foot1: "© 2026 Andréas Brey. One static page, no trackers, no cookies, no third party requests. Hand written, keyboard tested.",
-    foot2: "Set in Atkinson Hyperlegible Next, designed for low vision, and DM Mono.",
     readoutLabel: "Contrast measured live on this page:",
     readoutText: "body text",
     readoutMuted: "secondary text",
     readoutLink: "links",
     readoutTail: "WCAG AAA starts at 7:1",
-    langSwitched: "Page language changed to English.",
     toDark: "Dark theme",
-    toLight: "Light theme",
-    title: "Andréas Brey, front-end engineer, accessibility and AI"
-  };
-
-  const FR = {
+    toLight: "Light theme"
+  } : {
+    copyLabel: "Copier l'adresse email",
     copyDone: "Adresse email copiée",
     readoutLabel: "Contraste mesuré en direct sur cette page :",
     readoutText: "texte courant",
     readoutMuted: "texte secondaire",
     readoutLink: "liens",
     readoutTail: "le niveau WCAG AAA commence à 7:1",
-    langSwitched: "Langue de la page passée en français.",
     toDark: "Thème sombre",
-    toLight: "Thème clair",
-    title: "Andréas Brey, ingénieur front-end, accessibilité et IA"
+    toLight: "Thème clair"
   };
 
-  /* Le français affiché fait foi : on le relève une fois pour pouvoir y revenir. */
-  const nodes = [...document.querySelectorAll("[data-i18n]")];
-  for (const node of nodes) { FR[node.dataset.i18n] = node.textContent; }
-
-  let lang = "fr";
-  const dict = () => (lang === "en" ? EN : FR);
-
-  const readStore = key => { try { return localStorage.getItem(key); } catch { return null; } };
   const writeStore = (key, value) => { try { localStorage.setItem(key, value); } catch { /* stockage indisponible */ } };
 
   const announce = message => {
     announcer.textContent = "";
     setTimeout(() => { announcer.textContent = message; }, 80);
   };
-
-  /* -------------------------------- Langue --------------------------------
-     La langue vit aussi dans l'URL : la version anglaise est donc partageable
-     telle quelle, et un rechargement la conserve. */
-  const applyLang = (next, { announceChange = false, pushUrl = false } = {}) => {
-    lang = next;
-    const words = dict();
-    root.lang = next;
-    for (const node of nodes) {
-      const value = words[node.dataset.i18n];
-      if (value) { node.textContent = value; }
-    }
-    langBtn.lang = next === "fr" ? "en" : "fr";
-    /* Le CV suit la langue de la page. */
-    cvLink.href = next === "en" ? "cv/andreas-brey-cv-en.pdf" : "cv/andreas-brey-cv.pdf";
-    cvLink.hreflang = next;
-    document.title = words.title;
-    paintTheme();
-    paintReadout();
-    writeStore("lang", next);
-    if (pushUrl) {
-      const url = new URL(location.href);
-      url.searchParams.set("lang", next);
-      history.replaceState(null, "", url);
-    }
-    if (announceChange) { announce(words.langSwitched); }
-  };
-
-  langBtn.addEventListener("click", () => {
-    applyLang(lang === "fr" ? "en" : "fr", { announceChange: true, pushUrl: true });
-  });
 
   /* -------------------------------- Thème ---------------------------------
      Deux états seulement : la préférence système, ou son contraire épinglé.
@@ -1072,7 +961,6 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   const currentTheme = () => root.dataset.theme || (darkQuery.matches ? "dark" : "light");
 
   function paintTheme() {
-    const words = dict();
     const isDark = currentTheme() === "dark";
     themeBtn.textContent = isDark ? words.toLight : words.toDark;
     themeBtn.setAttribute("aria-label", lang === "en"
@@ -1120,7 +1008,6 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   };
 
   function paintReadout() {
-    const words = dict();
     const background = getComputedStyle(document.body).backgroundColor;
     const samples = [
       [words.readoutText, document.body],
@@ -1167,9 +1054,9 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     copyBtn.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(address);
-        copyBtn.textContent = dict().copyDone;
-        announce(dict().copyDone);
-        setTimeout(() => { copyBtn.textContent = dict().copyLabel; }, 2400);
+        copyBtn.textContent = words.copyDone;
+        announce(words.copyDone);
+        setTimeout(() => { copyBtn.textContent = words.copyLabel; }, 2400);
       } catch {
         location.href = mailHref;
       }
@@ -1180,12 +1067,8 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   document.getElementById("portrait")?.addEventListener("error", event => event.target.remove());
 
   /* -------------------------------- Démarrage -------------------------------- */
-  const requested = new URLSearchParams(location.search).get("lang");
-  const stored = readStore("lang");
-  const preferred = [requested, stored].find(value => value === "fr" || value === "en")
-    ?? (navigator.language?.toLowerCase().startsWith("fr") ? "fr" : "en");
-
-  applyLang(preferred);
+  paintTheme();
+  paintReadout();
   document.getElementById("toolbar").hidden = false;
 })();
 </script>
