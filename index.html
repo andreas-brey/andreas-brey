@@ -489,28 +489,26 @@ section + section { border-top: 1px solid var(--rule); }
   background: var(--paper-alt);
   border: 1px solid var(--rule);
   border-inline-start: 4px solid var(--accent);
-  padding: clamp(1.25rem, 4vw, 2.25rem);
+  padding: clamp(1.1rem, 3vw, 1.75rem);
 }
-.callout .label { margin-bottom: 1rem; color: var(--accent); }
-.callout-lead {
-  font-size: clamp(1.125rem, 2.6vw, 1.3rem);
-  line-height: 1.45;
-}
-.deadlines { margin: 1.75rem 0; padding: 0; max-width: var(--measure); list-style: none; }
+.callout .label { margin-bottom: 0.75rem; color: var(--accent); }
+.callout-lead { font-size: clamp(1.0625rem, 2.2vw, 1.1875rem); line-height: 1.45; }
+/* Dates courtes : la colonne des dates tient aussi sur mobile. */
+.deadlines { margin: 1rem 0; padding: 0; max-width: var(--measure); list-style: none; }
 .deadlines li {
   display: grid;
-  gap: 0.2rem 1.25rem;
-  padding: 0.8rem 0;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0 1rem;
+  padding: 0.45rem 0;
   border-top: 1px solid var(--rule);
   font-size: 0.9375rem;
   color: var(--ink-muted);
 }
 .deadlines li:last-child { border-bottom: 1px solid var(--rule); }
-@media (min-width: 40rem) { .deadlines li { grid-template-columns: 8.5rem minmax(0, 1fr); } }
 .deadlines .date {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
-  line-height: 1.85;
   letter-spacing: 0.03em;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
@@ -520,7 +518,6 @@ section + section { border-top: 1px solid var(--rule); }
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  margin-top: 0.5rem;
   padding: 0.5rem 0.85rem;
   border: 1px solid var(--accent);
   border-radius: 2px;
@@ -721,27 +718,26 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   <section aria-labelledby="s-didyouknow">
     <div class="callout">
       <h2 class="label" id="s-didyouknow" data-i18n="dykTitle">Le saviez-vous ?</h2>
-      <p class="callout-lead" data-i18n="dykLead">L'accessibilité numérique n'est plus une affaire de bonne volonté : c'est une obligation légale, contrôlée et sanctionnée, étendue en 2025 à une large part du secteur privé.</p>
+      <p class="callout-lead" data-i18n="dykLead">L'accessibilité numérique est une obligation légale, contrôlée et sanctionnée, et plus seulement pour le secteur public.</p>
       <ul class="deadlines">
         <li>
-          <time class="date" datetime="2023-09" data-i18n="dl1Date">Septembre 2023</time>
-          <span data-i18n="dl1">L'Arcom contrôle les sites et applications des organismes publics, au besoin par collecte automatisée, et publie ses mises en demeure. Jusqu'à 50&nbsp;000&nbsp;€ d'amende pour un service non accessible, 25&nbsp;000&nbsp;€ pour une déclaration d'accessibilité absente, renouvelables si le manquement dure six mois de plus. Les entreprises de plus de 250&nbsp;millions d'euros de chiffre d'affaires en France doivent elles aussi rendre leurs services accessibles et publier leur déclaration.</span>
+          <time class="date" datetime="2023" data-i18n="dl1Date">2023</time>
+          <span data-i18n="dl1">L'Arcom contrôle les sites et applications publics, avec des amendes jusqu'à 50&nbsp;000&nbsp;€.</span>
         </li>
         <li>
-          <time class="date" datetime="2025-06-28" data-i18n="dl2Date">28 juin 2025</time>
-          <span data-i18n="dl2">L'acte européen sur l'accessibilité s'applique. Commerce en ligne, banque, transport de voyageurs, livres numériques, télécoms : sites et applications doivent être accessibles, sous le contrôle de la DGCCRF et des régulateurs du secteur. Seules les microentreprises de services, moins de 10&nbsp;personnes et au plus 2&nbsp;millions d'euros de chiffre d'affaires ou de bilan, en sont dispensées.</span>
+          <time class="date" datetime="2025-06" data-i18n="dl2Date">Juin 2025</time>
+          <span data-i18n="dl2">L'acte européen sur l'accessibilité s'étend au privé : commerce en ligne, banque, transport, télécoms.</span>
         </li>
         <li>
-          <time class="date" datetime="2026-12" data-i18n="dl3Date">Décembre 2026</time>
-          <span data-i18n="dl3">Publication prévue du RGAA 5 : 40 nouveaux critères pour intégrer les WCAG 2.2 et la norme EN 301 549 v4.1.1, et des audits qui devront distinguer les non-conformités bloquantes. Un décret le rendra obligatoire courant 2027.</span>
+          <time class="date" datetime="2026-12" data-i18n="dl3Date">Déc. 2026</time>
+          <span data-i18n="dl3">Publication prévue du RGAA 5, aligné sur les WCAG 2.2 ; décret attendu en 2027.</span>
         </li>
         <li>
-          <time class="date" datetime="2030-06-28" data-i18n="dl4Date">28 juin 2030</time>
-          <span data-i18n="dl4">Fin de la période de transition : les services fournis avec des produits déjà en usage avant juin 2025, et les contrats conclus avant cette date, doivent à leur tour être conformes.</span>
+          <time class="date" datetime="2030-06" data-i18n="dl4Date">Juin 2030</time>
+          <span data-i18n="dl4">Fin de la transition pour les services déjà en place.</span>
         </li>
       </ul>
-      <p class="callout-offer" data-i18n="offerLead">Spécialiste de l'accessibilité et technicien du front-end, je vous accompagne dans cette mise à niveau, en mission de conseil.</p>
-      <p data-i18n="offerBody">Audit RGAA et WCAG de vos sites et applications, plan d'action classé selon ce qui bloque vraiment vos utilisateurs, aide à la déclaration d'accessibilité, puis corrections dans le code avec vos équipes et tests automatisés pour que la conformité tienne dans la durée.</p>
+      <p class="callout-offer" data-i18n="offerLead">Spécialiste de l'accessibilité et technicien du front-end, je vous accompagne en mission de conseil : audit RGAA et WCAG, plan d'action, corrections dans le code et tests automatisés.</p>
       <a class="callout-cta" href="#s-contact" data-i18n="offerCta">Parlons de votre mise en conformité</a>
     </div>
   </section>
@@ -904,6 +900,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
   const langBtn = document.getElementById("lang-btn");
   const themeBtn = document.getElementById("theme-btn");
   const readout = document.getElementById("readout");
+  const cvLink = document.querySelector(".cv-link");
 
   /* ------------------------------ Traductions ------------------------------
      Le français est dans le HTML : sans JavaScript la page reste complète et
@@ -915,7 +912,7 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     place: "Strasbourg, eastern France",
     tagline: "I make accessible the web applications that companies around the world use every day, and I work with AI agents without shipping anything I have not verified.",
     contactJump: "Get in touch",
-    cvLink: "My résumé (PDF in French, 108 KB)",
+    cvLink: "My CV (PDF, 100 KB)",
     seg1: "Contract .NET work",
     seg2: "Ortho Clinical Diagnostics",
     seg3: "Four J's Development Tools",
@@ -929,17 +926,16 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
     intro: "I have been building web interfaces for sixteen years, almost always in JavaScript. Since 2015 I have worked at Four J's Development Tools on a web client that companies around the world use every day. The work comes down to three questions: does it hold up under load, will it still be maintainable in five years, and can everyone actually use it, keyboard and screen reader included.",
     quote: "The kind of work where you live with your own code for years, and where one bad technical call keeps costing you for just as long.",
     dykTitle: "Did you know?",
-    dykLead: "In France and across the EU, digital accessibility is no longer a matter of goodwill: it is a legal obligation, checked and enforced, extended in 2025 to a large part of the private sector.",
-    dl1Date: "September 2023",
-    dl1: "Arcom, the French digital regulator, audits public bodies' websites and apps, automated crawling included, and publishes its formal notices. Fines reach €50,000 for an inaccessible service and €25,000 for a missing accessibility statement, and can be imposed again if the breach lasts six more months. Companies with a French turnover above €250 million must also make their services accessible and publish a statement.",
-    dl2Date: "28 June 2025",
-    dl2: "The European Accessibility Act applies. E-commerce, banking, passenger transport, e-books, telecoms: websites and apps must be accessible, checked in France by the consumer protection authority and the sector regulators. Only micro-enterprises providing services, fewer than 10 people and no more than €2 million in turnover or balance sheet, are exempt.",
-    dl3Date: "December 2026",
-    dl3: "RGAA 5, the French accessibility framework, is due: 40 new criteria to cover WCAG 2.2 and EN 301 549 v4.1.1, and audits that must single out blocking failures. A decree will make it mandatory during 2027.",
-    dl4Date: "28 June 2030",
-    dl4: "End of the transition period: services delivered with products already in use before June 2025, and contracts signed before that date, must comply as well.",
-    offerLead: "Accessibility specialist and hands-on front-end engineer, I can help you through this upgrade as a consultant.",
-    offerBody: "RGAA and WCAG audits of your websites and apps, an action plan ranked by what actually blocks your users, help with the accessibility statement, then fixes in the code alongside your teams and automated tests so compliance holds over time.",
+    dykLead: "In France, digital accessibility is a legal obligation, checked and enforced, and no longer for the public sector alone.",
+    dl1Date: "2023",
+    dl1: "Arcom, the French digital regulator, audits public websites and apps, with fines of up to €50,000.",
+    dl2Date: "June 2025",
+    dl2: "The European Accessibility Act reaches the private sector: e-commerce, banking, transport, telecoms.",
+    dl3Date: "Dec 2026",
+    dl3: "RGAA 5, the French framework aligned with WCAG 2.2, is due; a decree is expected in 2027.",
+    dl4Date: "June 2030",
+    dl4: "End of the transition for services already in place.",
+    offerLead: "Accessibility specialist and hands-on front-end engineer, I can help as a consultant: RGAA and WCAG audits, an action plan, fixes in the code and automated tests.",
     offerCta: "Let's talk about your compliance",
     workTitle: "What I actually do",
     a11yTitle: "Accessibility",
@@ -1049,6 +1045,9 @@ footer { padding-block: 0 clamp(2.5rem, 6vw, 4rem); }
       if (value) { node.textContent = value; }
     }
     langBtn.lang = next === "fr" ? "en" : "fr";
+    /* Le CV suit la langue de la page. */
+    cvLink.href = next === "en" ? "cv/andreas-brey-cv-en.pdf" : "cv/andreas-brey-cv.pdf";
+    cvLink.hreflang = next;
     document.title = words.title;
     paintTheme();
     paintReadout();
